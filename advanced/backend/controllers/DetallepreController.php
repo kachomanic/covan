@@ -20,7 +20,7 @@ class DetallepreController extends Controller
         return [
           'access'=>[
               'class'=>AccessControl::classname(),
-              'only'=>['create','update','delete'],
+              'only'=>['create','update','delete','view'],
               'rules'=>[
                   [
                     'allow'=>true,
