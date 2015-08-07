@@ -25,7 +25,7 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'My Company',
+                'brandLabel' => 'UNIVERSIDAD NACIONAL ADVENTISTA DE NICARAGUA',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
@@ -37,6 +37,27 @@ AppAsset::register($this);
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
             } else {
+              $menuItems[] =['label' => 'Catálogo', 'items' => [
+                      ['label' => 'Estudiantes', 'url' => ['/estudiantes/index']],
+                      ['label' => 'Docentes', 'url' => ['/docentes/index']],
+                      ['label' => 'Especialidades', 'url' => ['/especialidad/index']],
+                      ['label' => 'Asignaturas', 'url' => ['/asignatura/index']],
+                      ['label' => 'Estudios', 'url' => ['/estudios/index']],
+                      ['label' => 'Facultades', 'url' => ['/facultad/index']],
+                      ['label' => 'Grupos', 'url' => ['/grupo/index']],
+                      ['label' => 'Planes', 'url' => ['/plan/index']],
+                      ['label' => 'Prerrequisitos', 'url' => ['/prerrequisito/index']],
+                  ]];
+                  $menuItems[] =['label' => 'Operaciones', 'items' => [
+                          ['label' => 'Matricular', 'url' => ['/estudiantes/index']],
+                          ['label' => 'Ingresar notas', 'url' => ['/estudiantes/index']],
+                      ]];
+                  $menuItems[] =['label' => 'Informes', 'items' => [
+                          ['label' => 'Plan academico', 'url' => ['/estudiantes/index']],
+                          ['label' => 'Avance de plan', 'url' => ['/estudiantes/index']],
+                          ['label' => 'Prerrequisitos', 'url' => ['/estudiantes/index']],
+                      ]];
+
                 $menuItems[] = [
                     'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
                     'url' => ['/site/logout'],
@@ -60,7 +81,7 @@ AppAsset::register($this);
 
     <footer class="footer">
         <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; UNADENIC <?= date('Y') ?></p>
         <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
     </footer>
