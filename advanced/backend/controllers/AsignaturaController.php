@@ -8,7 +8,7 @@ use backend\models\AsignaturaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\filters\AccessControl;
 /**
  * AsignaturaController implements the CRUD actions for Asignatura model.
  */
@@ -17,6 +17,16 @@ class AsignaturaController extends Controller
     public function behaviors()
     {
         return [
+          'access'=>[
+              'class'=>AccessControl::classname(),
+              'only'=>['create','update','delete'],
+              'rules'=>[
+                  [
+                    'allow'=>true,
+                    'roles'=>['@']
+                  ],
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

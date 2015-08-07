@@ -7,7 +7,7 @@ $this->title = 'My Yii Application';
 
     <div class="jumbotron">
         <h3>Bienvenido!</h3>
-
+        <img src="unade.png" width="15%" height="15%">
         <p class="lead">Sistema de registro académico.</p>
 
         <p><a class="btn btn-lg btn-success" href="index.php?r=estudiantes/create">Registrar estudiante</a></p>
@@ -46,6 +46,7 @@ $this->title = 'My Yii Application';
                     fugiat nulla pariatur.</p>
 
                 <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+
             </div>
         </div>
 

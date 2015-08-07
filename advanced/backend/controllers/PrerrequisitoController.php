@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use backend\models\Detallepre;
 use backend\models\Model;
+use yii\filters\AccessControl;
 /**
  * PrerrequisitoController implements the CRUD actions for Prerrequisito model.
  */
@@ -18,6 +19,16 @@ class PrerrequisitoController extends Controller
     public function behaviors()
     {
         return [
+          'access'=>[
+              'class'=>AccessControl::classname(),
+              'only'=>['create','update','delete'],
+              'rules'=>[
+                  [
+                    'allow'=>true,
+                    'roles'=>['@']
+                  ],
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

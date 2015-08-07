@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use yii\filters\AccessControl;
 
 /**
  * EstudiosController implements the CRUD actions for Estudios model.
@@ -18,6 +19,16 @@ class EstudiosController extends Controller
     public function behaviors()
     {
         return [
+          'access'=>[
+              'class'=>AccessControl::classname(),
+              'only'=>['create','update','delete'],
+              'rules'=>[
+                  [
+                    'allow'=>true,
+                    'roles'=>['@']
+                  ],
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

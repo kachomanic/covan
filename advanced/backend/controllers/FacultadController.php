@@ -8,6 +8,7 @@ use backend\models\FacultadSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * FacultadController implements the CRUD actions for Facultad model.
@@ -17,6 +18,16 @@ class FacultadController extends Controller
     public function behaviors()
     {
         return [
+          'access'=>[
+              'class'=>AccessControl::classname(),
+              'only'=>['create','update','delete'],
+              'rules'=>[
+                  [
+                    'allow'=>true,
+                    'roles'=>['@']
+                  ],
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
