@@ -20,7 +20,7 @@ class FacultadController extends Controller
         return [
           'access'=>[
               'class'=>AccessControl::classname(),
-              'only'=>['create','update','delete','view'],
+              'only'=>['create','update','delete','view','index'],
               'rules'=>[
                   [
                     'allow'=>true,
@@ -29,7 +29,7 @@ class FacultadController extends Controller
                 ]
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::className(),,'index'
                 'actions' => [
                     'delete' => ['post'],
                 ],

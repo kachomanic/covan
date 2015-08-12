@@ -20,7 +20,7 @@ class GrupoController extends Controller
         return [
           'access'=>[
               'class'=>AccessControl::classname(),
-              'only'=>['create','update','delete','view'],
+              'only'=>['create','update','delete','view','index'],
               'rules'=>[
                   [
                     'allow'=>true,

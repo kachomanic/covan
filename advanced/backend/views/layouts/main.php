@@ -47,6 +47,7 @@ AppAsset::register($this);
                       ['label' => 'Grupos', 'url' => ['/grupo/index']],
                       ['label' => 'Planes', 'url' => ['/plan/index']],
                       ['label' => 'Prerrequisitos', 'url' => ['/prerrequisito/index']],
+                      ['label' => 'Carreras', 'url' => ['/carrera/index']],
                   ]];
                   $menuItems[] =['label' => 'Operaciones', 'items' => [
                           ['label' => 'Matricular', 'url' => ['/estudiantes/index']],
