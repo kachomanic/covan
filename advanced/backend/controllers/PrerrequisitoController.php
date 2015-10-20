@@ -8,6 +8,9 @@ use backend\models\PrerrequisitoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\models\Detallepre;
+use backend\models\Model;
+
 
 /**
  * PrerrequisitoController implements the CRUD actions for Prerrequisito model.
@@ -61,12 +64,41 @@ class PrerrequisitoController extends Controller
     public function actionCreate()
     {
         $model = new Prerrequisito();
+        $modelsDetallepre = [new Detallepre];
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idPrerreq]);
+          $modelsDetallepre = Model::createMultiple(Detallepre::classname());
+          Model::loadMultiple($modelsDetallepre, Yii::$app->request->post());
+
+       // validate all models
+       $valid = $model->validate();
+       $valid = Model::validateMultiple($modelsDetallepre) && $valid;
+
+       if ($valid) {
+           $transaction = \Yii::$app->db->beginTransaction();
+           try {
+               if ($flag = $model->save(false)) {
+                   foreach ($modelsDetallepre as $modelsDetallepre) {
+                       $modelsDetallepre->idPrerreq = $model->idPrerreq;
+                       if (! ($flag = $modelsDetallepre->save(false))) {
+                           $transaction->rollBack();
+                           break;
+                       }
+                   }
+               }
+               if ($flag) {
+                   $transaction->commit();
+                   return $this->redirect(['view', 'id' => $model->idPrerreq]);
+               }
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+       }
+
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'modelsDetallepre' => (empty($modelsDetallepre)) ? [new Detallepre] : $modelsDetallepre
             ]);
         }
     }
