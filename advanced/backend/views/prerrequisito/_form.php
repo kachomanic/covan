@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use wbraganca\dynamicform\DynamicFormWidget;
+use yii\helpers\ArrayHelper;
+use backend\models\Asignatura;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Prerrequisito */
@@ -13,7 +16,16 @@ use wbraganca\dynamicform\DynamicFormWidget;
 
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
 
-    <?= $form->field($model, 'idAsignatura')->textInput() ?>
+    <?= $form->field($model, 'idAsignatura')->widget(Select2::classname(), [
+          'data' => ArrayHelper::map(Asignatura::find()->all(),'idAsignatura','nombrea'),
+          'language' => 'en',
+          'options' => ['placeholder' => ''],
+          'pluginOptions' => [
+              'allowClear' => true
+          ],
+      ]); ?>
+
+
 
     <div class="row">
       <div class="panel panel-default">
@@ -54,7 +66,14 @@ use wbraganca\dynamicform\DynamicFormWidget;
                           ?>
                           <div class="row">
                               <div class="col-sm-6">
-                                  <?= $form->field($modelsDetallepre, "[{$i}]idAsignatura")->textInput(['maxlength' => true]) ?>
+                                <?= $form->field($modelsDetallepre, 'idAsignatura')->widget(Select2::classname(), [
+                                      'data' => ArrayHelper::map(Asignatura::find()->all(),'idAsignatura','nombrea'),
+                                      'language' => 'en',
+                                      'options' => ['placeholder' => ''],
+                                      'pluginOptions' => [
+                                          'allowClear' => true
+                                      ],
+                                  ]); ?>
                               </div>
                           </div>
                       </div>
