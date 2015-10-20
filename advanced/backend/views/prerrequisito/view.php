@@ -29,9 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'idPrerreq',
-            'idAsignatura0.nombrea',
+            'idAsignatura',
         ],
     ]) ?>
-
 
 </div>

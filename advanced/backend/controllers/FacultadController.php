@@ -29,7 +29,7 @@ class FacultadController extends Controller
                 ]
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),,'index'
+                'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],

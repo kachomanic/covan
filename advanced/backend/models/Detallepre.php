@@ -30,7 +30,7 @@ class Detallepre extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-          //  [['idPrerreq', 'idAsignatura'], 'required'],
+            [['idPrerreq', 'idAsignatura'], 'required'],
             [['idPrerreq', 'idAsignatura'], 'integer']
         ];
     }

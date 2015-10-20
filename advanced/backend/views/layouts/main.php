@@ -48,6 +48,8 @@ AppAsset::register($this);
                       ['label' => 'Planes', 'url' => ['/plan/index']],
                       ['label' => 'Prerrequisitos', 'url' => ['/prerrequisito/index']],
                       ['label' => 'Carreras', 'url' => ['/carrera/index']],
+                      ['label' => 'Tipo-Aprobación', 'url' => ['/tipo-ap/index']],
+
                   ]];
                   $menuItems[] =['label' => 'Operaciones', 'items' => [
                           ['label' => 'Matricular', 'url' => ['/estudiantes/index']],

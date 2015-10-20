@@ -8,9 +8,7 @@ use backend\models\PrerrequisitoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\models\Detallepre;
-use backend\models\Model;
-use yii\filters\AccessControl;
+
 /**
  * PrerrequisitoController implements the CRUD actions for Prerrequisito model.
  */
@@ -19,16 +17,6 @@ class PrerrequisitoController extends Controller
     public function behaviors()
     {
         return [
-          'access'=>[
-              'class'=>AccessControl::classname(),
-              'only'=>['create','update','delete','view','index'],
-              'rules'=>[
-                  [
-                    'allow'=>true,
-                    'roles'=>['@']
-                  ],
-                ]
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -73,45 +61,12 @@ class PrerrequisitoController extends Controller
     public function actionCreate()
     {
         $model = new Prerrequisito();
-        $modelsdetallepre = [new Detallepre];
 
-        if ($model->load(Yii::$app->request->post()) && $model->save())
-        {
-          $modelsdetallepre = Model::createMultiple(Detallepre::classname());
-          Model::loadMultiple($modelsdetallepre, Yii::$app->request->post());
-
-          // validate all models
-          $valid = $model->validate();
-          $valid = Model::validateMultiple($modelsdetallepre) && $valid;
-
-          if ($valid) {
-              $transaction = \Yii::$app->db->beginTransaction();
-              try {
-                  if ($flag = $model->save(false))
-                  {
-                      foreach ($modelsdetallepre as $modeldetallepre)
-                      {
-                          $modeldetallepre->idPrerreq = $model->idAsignatura;
-                          if (! ($flag = $modeldetallepre->save(false))) {
-                              $transaction->rollBack();
-                              break;
-                          }
-                      }
-                  }
-                  if ($flag) {
-                      $transaction->commit();
-                      return $this->redirect(['view', 'id' => $model->idPrerreq]);
-                  }
-              } catch (Exception $e) {
-                  $transaction->rollBack();
-              }
-          }
-////////////////////////////////////
-        }
-        else {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->idPrerreq]);
+        } else {
             return $this->render('create', [
                 'model' => $model,
-                'modelsdetallepre' => (empty($modelsdetallepre)) ? [new Detallepre] : $modelsdetallepre
             ]);
         }
     }
@@ -125,53 +80,8 @@ class PrerrequisitoController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $modelsdetallepre = [new Detallepre];
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
-          $oldIDs = ArrayHelper::map($modelsdetallepre, 'idPrerreq', 'idPrerreq');
-          $modelsdetallepre = Model::createMultiple(Address::classname(), $modelsdetallepre);
-          Model::loadMultiple($modelsdetallepre, Yii::$app->request->post());
-          $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsdetallepre, 'id', 'id')));
-
-          // ajax validation
-          if (Yii::$app->request->isAjax) {
-              Yii::$app->response->format = Response::FORMAT_JSON;
-              return ArrayHelper::merge(
-                  ActiveForm::validateMultiple($modelsdetallepre),
-                  ActiveForm::validate($model)
-              );
-          }
-
-          // validate all models
-          $valid = $model->validate();
-          $valid = Model::validateMultiple($modelsdetallepre) && $valid;
-
-          if ($valid) {
-              $transaction = \Yii::$app->db->beginTransaction();
-              try {
-                  if ($flag = $model->save(false)) {
-                      if (! empty($deletedIDs)) {
-                          Address::deleteAll(['idPrerreq' => $deletedIDs]);
-                      }
-                      foreach ($modelsdetallepre as $modeldetallepre) {
-                          $modeldetallepre->idPrerreq = $model->idPrerreq;
-                          if (! ($flag = $modeldetallepre->save(false))) {
-                              $transaction->rollBack();
-                              break;
-                          }
-                      }
-                  }
-                  if ($flag) {
-                      $transaction->commit();
-                      return $this->redirect(['view', 'id' => $model->idPrerreq]);
-                  }
-              } catch (Exception $e) {
-                  $transaction->rollBack();
-              }
-          }
-
-
             return $this->redirect(['view', 'id' => $model->idPrerreq]);
         } else {
             return $this->render('update', [
