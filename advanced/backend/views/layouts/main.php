@@ -52,8 +52,8 @@ AppAsset::register($this);
 
                   ]];
                   $menuItems[] =['label' => 'Operaciones', 'items' => [
-                          ['label' => 'Matricular', 'url' => ['/estudiantes/index']],
-                          ['label' => 'Ingresar notas', 'url' => ['/estudiantes/index']],
+                          ['label' => 'Matricular', 'url' => ['/matricula/index']],
+                          ['label' => 'Ingresar notas', 'url' => ['/detallemat/index']],
                       ]];
                   $menuItems[] =['label' => 'Informes', 'items' => [
                           ['label' => 'Plan academico', 'url' => ['/estudiantes/index']],
