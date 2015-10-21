@@ -16,16 +16,10 @@ use kartik\select2\Select2;
 
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
 
-    <?= $form->field($model, 'idAsignatura')->widget(Select2::classname(), [
-          'data' => ArrayHelper::map(Asignatura::find()->all(),'idAsignatura','nombrea'),
-          'language' => 'en',
-          'options' => ['placeholder' => ''],
-          'pluginOptions' => [
-              'allowClear' => true
-          ],
-      ]); ?>
-
-
+    <?= $form->field($model, 'idAsignatura')->dropDownList(
+      ArrayHelper::map(Asignatura::find()->all(),'idAsignatura','nombrea'),
+      ['prompt'=>'Selecciona asignatura']
+    )?>
 
     <div class="row">
       <div class="panel panel-default">
@@ -50,7 +44,7 @@ use kartik\select2\Select2;
               <?php foreach ($modelsDetallepre as $i => $modelsDetallepre): ?>
                   <div class="item panel panel-default"><!-- widgetBody -->
                       <div class="panel-heading">
-                          <h3 class="panel-title pull-left">Asignatura</h3>
+                          <h3 class="panel-title pull-left"> Asignatura</h3>
                           <div class="pull-right">
                               <button type="button" class="add-item btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></button>
                               <button type="button" class="remove-item btn btn-danger btn-xs"><i class="glyphicon glyphicon-minus"></i></button>
@@ -66,14 +60,13 @@ use kartik\select2\Select2;
                           ?>
                           <div class="row">
                               <div class="col-sm-6">
-                                <?= $form->field($modelsDetallepre, 'idAsignatura')->widget(Select2::classname(), [
-                                      'data' => ArrayHelper::map(Asignatura::find()->all(),'idAsignatura','nombrea'),
-                                      'language' => 'en',
-                                      'options' => ['placeholder' => ''],
-                                      'pluginOptions' => [
-                                          'allowClear' => true
-                                      ],
-                                  ]); ?>
+
+                                <?= $form->field($modelsDetallepre, "[{$i}]idAsignatura")->dropDownList(
+                                  ArrayHelper::map(Asignatura::find()->all(),'idAsignatura','nombrea'),
+                                  ['prompt'=>'Selecciona asignatura']
+                                )?>
+
+
                               </div>
                           </div>
                       </div>

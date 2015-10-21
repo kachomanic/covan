@@ -66,7 +66,8 @@ class PrerrequisitoController extends Controller
         $model = new Prerrequisito();
         $modelsDetallepre = [new Detallepre];
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save())
+        {
           $modelsDetallepre = Model::createMultiple(Detallepre::classname());
           Model::loadMultiple($modelsDetallepre, Yii::$app->request->post());
 
@@ -78,7 +79,8 @@ class PrerrequisitoController extends Controller
            $transaction = \Yii::$app->db->beginTransaction();
            try {
                if ($flag = $model->save(false)) {
-                   foreach ($modelsDetallepre as $modelsDetallepre) {
+                   foreach ($modelsDetallepre as $modelsDetallepre)
+                   {
                        $modelsDetallepre->idPrerreq = $model->idPrerreq;
                        if (! ($flag = $modelsDetallepre->save(false))) {
                            $transaction->rollBack();
@@ -94,8 +96,9 @@ class PrerrequisitoController extends Controller
                $transaction->rollBack();
            }
        }
-
-        } else {
+       return $this->redirect(['view','id' => $model->idPrerreq]);
+        }
+        else {
             return $this->render('create', [
                 'model' => $model,
                 'modelsDetallepre' => (empty($modelsDetallepre)) ? [new Detallepre] : $modelsDetallepre
