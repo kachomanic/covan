@@ -66,7 +66,6 @@ use kartik\select2\Select2;
                                   ['prompt'=>'Selecciona asignatura']
                                 )?>
 
-
                               </div>
                           </div>
                       </div>

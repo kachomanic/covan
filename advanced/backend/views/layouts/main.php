@@ -25,7 +25,7 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'UNIVERSIDAD NACIONAL ADVENTISTA DE NICARAGUA',
+                'brandLabel' => 'UNIVERSIDAD ADVENTISTA DE NICARAGUA',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',

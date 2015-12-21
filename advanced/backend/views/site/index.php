@@ -1,7 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'UNADENIC SISTEMA ACADEMICO';
 ?>
 <div class="site-index">
 
@@ -98,4 +98,3 @@ document.onkeydown=checkKeyCode;
 </script>
 
 </div>
-

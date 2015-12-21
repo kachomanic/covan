@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Prerrequisito */
 
-$this->title = 'Create Prerrequisito';
+$this->title = 'Crear prerrequisitos';
 $this->params['breadcrumbs'][] = ['label' => 'Prerrequisitos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
